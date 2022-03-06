@@ -67,12 +67,13 @@
                     <h2>{{quote['body']}}</h2>
                     <h3>{{quote['author']}}</h3>
                     <form action="http://127.0.0.1:5000/search", method="post">
-                        <input type="hidden", name="action", value="add">
                         <input type="hidden", name="quoteID", value="{{quote['id']}}">
                         <input type="hidden", name="query", value='{{query}}'>
                         {% if quote["id"] in likes %}
+                            <input type="hidden", name="action", value="remove">
                             <input type="image", class="like", src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg", onclick='mark_like(this)'>
                         {% else %}
+                            <input type="hidden", name="action", value="add">   
                             <input type="image", class="like", src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/like.svg", onclick='mark_like(this)'>
                         {% endif %}
                     </form>

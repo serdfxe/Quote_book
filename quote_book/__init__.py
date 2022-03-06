@@ -1,0 +1,12 @@
+from flask import Flask
+from quote_book.views.admin import admin
+from quote_book.views.main import main
+
+def create_app():
+    app = Flask(__name__)
+    app.debug = 1
+    app.secret_key = b'sheeeeeeeeeesh'
+
+    app.register_blueprint(main)
+
+    return app

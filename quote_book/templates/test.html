@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>navbar</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@100&display=swap');
+    H2 {
+        font-family: comfortaa;
+        size:10px;
+        color: #222222;
+        transition: all 1s;
+    }
+
+    H3{
+        font-family: comfortaa;
+        size:8px;
+        color: #404040;
+        transition: all 1s;
+    }
+
+    .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+    }
+
+    .aligncenter {
+        text-align: center;
+    }
+
+    .sidenav {
+        height: 100%;
+        width: 70px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #DBEFED;
+        overflow-x: hidden;
+        padding-top: 20px;
+        transition: 0.5s;
+    }
+
+    .sidenav:hover{
+        width: 100px;
+    }
+
+    .sidenav a {
+        position: relative;
+        padding: 7px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        display: block;
+        color: hsl(169, 15%, 48%);
+    }
+
+    .sidenav a img{
+        height: 40px;
+        transition: 0.5s;
+    }
+
+    .sidenav a img:hover{
+        height: 60px;
+    }
+
+    .maindiv{
+    position: relative; 
+    top: -60px;
+    margin-left: auto; 
+    margin-right: auto; 
+    background-image: url(https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/container_continue.svg); 
+    width: 414px;
+  }
+  .bodydiv{
+    border: 1px;
+    font-family: comfortaa;
+    size:6px;
+    color: #FFFFFF;
+    white-space: pre-line;
+    position: relative;
+    top: -35px; 
+    background-image: url(https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/text_continer.svg);
+    margin-left: auto; 
+    margin-right: auto;
+    width: 344px;
+  }
+  .endimg{
+    position: relative; top: 30px;
+  }
+  .likebtn{
+    position: relative;
+    bottom: 30px;
+  }
+</style>
+<body>
+    <div class="sidenav", id="navbar">
+        <a href="http://sheeesh.ru/account", onmouseover="cursor(this)"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/account_nav.svg"></a>
+        <a href="http://sheeesh.ru/home", onmouseover="cursor(this)"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/search_nav.svg"></a>
+        <a href="http://sheeesh.ru/annotation", onmouseover="cursor(this)"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/info_nav.svg"></a> 
+        <a href="http://sheeesh.ru/saves", onmouseover="cursor(this)"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/saves_nav.svg"></a> 
+    </div>
+
+    <div class = "main">
+
+        <p class="aligncenter">
+            <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/head_home.svg", style="margin: auto;">
+        </p>
+
+        <form action="http://sheeesh.ru/search", method="post", class="aligncenter">
+            <input type="image", src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/search.svg", style="position: relative; width: 300px; left: 100px">
+            <input type="text", name="query" class='textarea_', id='1', src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/search.svg", style="resize: none; position: relative; left: -200px; width: 200px; height: 23px; bottom: 22px;">
+        </form>  
+          
+        <p>
+            <br></br>
+            <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", class="aligncenter">
+            <h2>Тонкость не доказывает еще ума. Глупцы и даже сумасшедшие бывают удивительно тонки.</h2>
+            <h3>Пушкин Александр</h3>
+            <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/like.svg">
+
+            <br></br>
+            <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", class="aligncenter">
+            <h2>Мы почитаем всех — нулями, А единицами — себя.</h2>
+            <h3>Пушкин Александр</h3>
+            <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg">
+
+            <br></br>
+            <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", class="aligncenter">
+            <h2>Злословие даже без доказательств оставляет почти вечные следы.</h2>
+            <h3>Пушкин Александр</h3>
+        </p>
+    </div>
+</body>
+</html>

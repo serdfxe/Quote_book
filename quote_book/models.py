@@ -144,7 +144,20 @@ class User_db():
         
         if info != None:
             info = eval(info[0])
-            info.append(str(quoteID))
+            if str(quoteID) not in info: info.append(str(quoteID))
+            
+            cursor.execute("""UPDATE users set info = "%s" WHERE name='%s'""" % (str(info), name))
+            connection.commit()
+
+
+    def remove_quote_from_user_list(name, quoteID):
+        connection, cursor = User_db.make_connection()
+        cursor.execute("""SELECT info FROM users WHERE name='%s'""" % name)
+        info = cursor.fetchone()
+        
+        if info != None:
+            info = eval(info[0])
+            if quoteID in info: info.remove(quoteID)
             
             cursor.execute("""UPDATE users set info = "%s" WHERE name='%s'""" % (str(info), name))
             connection.commit()

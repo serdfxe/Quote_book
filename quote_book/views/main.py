@@ -45,6 +45,13 @@ def searching_page():
             query = request.form['query']
             return render_template(urls["search"], navbar = navbar_body, nav_style = navbar_style, results=Quote_book_db.search_quotes(query), likes= User_db.get_user_list(name), query = query)
         
+        elif request.form["action"] == "remove":
+            if name == None: return redirect(url_for("main.registration_page"))
+            quoteID = request.form["quoteID"]
+            query = request.form["query"]
+            User_db.remove_quote_from_user_list(name, quoteID)
+            return render_template(urls["search"], navbar = navbar_body, nav_style = navbar_style, results=Quote_book_db.search_quotes(query), likes= User_db.get_user_list(name), query = query)
+
 
 @main.route("/reg", methods=('GET', 'POST'))
 def registration_page():
@@ -75,9 +82,12 @@ def saves_page():
 
     if request.method == "GET":
         results=Quote_book_db.get_quotes_from_user_list(name)
-        print(results)
 
-        return render_template(urls["saves"], navbar = navbar_body, nav_style = navbar_style, results=results, name = name)
+        return render_template(urls["saves"], urls = urls_navbar, navbar = navbar_body, nav_style = navbar_style, results=results, name = name)
     
     if request.method == "POST":
-        pass
+        if request.form["action"] == "remove":
+            quoteID = request.form["quoteID"]
+            User_db.remove_quote_from_user_list(name, quoteID)
+            results=Quote_book_db.get_quotes_from_user_list(name)
+            return render_template(urls["saves"], urls = urls_navbar, navbar = navbar_body, nav_style = navbar_style, results=results, name = name)

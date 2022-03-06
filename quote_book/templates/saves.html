@@ -53,6 +53,7 @@
         <p class="aligncenter">
             <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/main_account.svg">
             <h3 class="aligncenter" style="top: -20px; position: relative">{{name}}</h3>
+            <h2 class="aligncenter">Сохранённые цитаты:</h2>
 
             {% block content %}
             <ul>
@@ -61,7 +62,11 @@
                     <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", style="width: 400px; left: 10px; position: relative;">
                     <h2>{{quote['body']}}</h2>
                     <h3>{{quote['author']}}</h3>
-                    <img class="like", src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg", onclick='mark_like(this)'>
+                    <form action="{{urls['saves']}}", method="post">
+                        <input type="hidden", name="action", value="remove">
+                        <input type="hidden", name="quoteID", value="{{quote['id']}}">
+                        <input type="image", class="like", src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg", onclick='mark_like(this)'>
+                    </form>
                 </p>
                 {% endfor %}
             </ul>

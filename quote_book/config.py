@@ -8,7 +8,7 @@ urls = {
 }
 
 main_url = 'http://sheeesh.ru'
-main_url = "http://127.0.0.1:5000"
+#main_url = "http://127.0.0.1:5000"
 
 urls_navbar = {
     "home": f"{main_url}/home",
@@ -19,6 +19,7 @@ urls_navbar = {
     "log": f"{main_url}/log",
     "forgot_pssword": f""
 }
+
 navbar_style = """
 
 <style>
@@ -71,4 +72,9 @@ navbar_body = f"""
 paths = {
     'data':'/Users/pasha/Desktop/крутая папка/проги/projects/Quote_book/quote_book/data.sqlite',
     'users':'/Users/pasha/Desktop/крутая папка/проги/projects/Quote_book/quote_book/users_data.db'
+}
+
+paths = {
+    'data':'/root/Quote_book/quote_book/data.sqlite',
+    'users':'/root/Quote_book/quote_book/users_data.db'
 }

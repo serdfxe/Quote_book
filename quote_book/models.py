@@ -68,7 +68,24 @@ class Quote_book_db():
 
         mes = mes.union(dealsID_rec)
         
-        return Quote_book_db.make_message_from_list(mes)    
+        connection, cursor = Quote_book_db.make_connection()
+
+        message = []
+
+        for cit_id in mes:
+            cursor.execute("""SELECT body, catID, ID FROM deals WHERE ID='%s'""" % cit_id)
+            rec = cursor.fetchone()
+            if rec!=None:
+                body = rec[0].replace(s, "<mark>"+s+"</mark>")
+                nameID = rec[1]
+                citID = rec[2]
+
+                cursor.execute("""SELECT catname FROM cat WHERE ID = '%s'""" % nameID)
+                name = cursor.fetchone()[0].replace(s, "<mark>"+s+"</mark>")
+                
+                message.append({'body':body,'author':name, 'id':citID})
+
+        return message  
 
 
 class User_db():

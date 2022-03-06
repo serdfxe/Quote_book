@@ -1,6 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/head_home.svg">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поиск</title>
@@ -70,7 +71,7 @@
                     <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", style="width: 400px; left: 10px; position: relative;">
                     <h2>{{quote['body'] | safe}}</h2>
                     <h3>{{quote['author'] | safe}}</h3>
-                    <form action="http://127.0.0.1:5000/search", method="post">
+                    <form action="http://sheeesh.ru/search", method="post">
                         <input type="hidden", name="quoteID", value="{{quote['id']}}">
                         <input type="hidden", name="query", value='{{query}}'>
                         {% if quote["id"] in likes %}

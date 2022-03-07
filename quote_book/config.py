@@ -8,7 +8,7 @@ urls = {
 }
 
 main_url = 'http://sheeesh.ru'
-#main_url = "http://127.0.0.1:5000"
+main_url = "http://127.0.0.1"
 
 urls_navbar = {
     "home": f"{main_url}/home",

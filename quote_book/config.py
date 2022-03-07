@@ -18,7 +18,7 @@ urls_navbar = {
     "saves": f"{main_url}/saves",
     "reg": f"{main_url}/reg",
     "log": f"{main_url}/log",
-    "forgot_pssword": f"{main_url}/forgot_password"
+    "forgot_password": f"{main_url}/forgot_password"
 }
 
 navbar_style = """

@@ -13,18 +13,21 @@ def root_page():
 
 @main.route("/home", methods=('GET', 'POST'))
 def home_page():
+    name = session.get("name")
+    if name == None: return redirect("reg")
+
     if request.method == "GET":
-        name = session.get("name")
-        if name == None:
-            return redirect("reg")
-        return render_template(urls["home"], navbar = navbar_body, nav_style = navbar_style, name = session['name'], urls = urls_navbar)
+        return render_template(urls["home"], navbar = navbar_body, nav_style = navbar_style, info = User_db.get_user_info(name), urls = urls_navbar)
         
     if request.method == "POST":
         if request.form["action"] == "quit":
             session.pop("name")
-            print(session.get("name"))
-            print("OK LET'S GO")
             return redirect(url_for('main.registration_page'))
+        elif request.form["action"] == "change_email":
+            User_db.change_value(name, 'email', request.form['email'])
+
+            return render_template(urls["home"], navbar = navbar_body, nav_style = navbar_style, info = User_db.get_user_info(name), urls = urls_navbar)
+
 
 
 @main.route("/search", methods=('GET', 'POST'))

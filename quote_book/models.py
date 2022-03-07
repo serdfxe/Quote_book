@@ -129,8 +129,8 @@ class User_db():
         connection, cursor = User_db.make_connection()
 
         cursor.execute('''SELECT userid FROM users''')
-        lastid = cursor.fetchall()[-1][0]+1
-        cursor.execute("""INSERT INTO users(userid, name, password, info) VALUES(?,?,?, ?);""", (lastid, name, password, str(info)))
+        newid = len(cursor.fetchall())
+        cursor.execute("""INSERT INTO users(userid, name, password, info, email) VALUES(?,?,?,?,?);""", (newid, name, password, str(info), None))
         connection.commit()
         return True
 
@@ -178,3 +178,16 @@ class User_db():
             
             cursor.execute("""UPDATE users set info = "%s" WHERE name='%s'""" % (str(info), name))
             connection.commit()
+
+
+    def change_value(name, column, value):
+        connection, cursor = User_db.make_connection()
+        cursor.execute("""UPDATE users set '%s' = "%s" WHERE name='%s'""" % (column, value, name))
+
+        connection.commit()
+
+ 
+    def get_user_info(name, *columns):
+        connection, cursor = User_db.make_connection()
+
+        cursor.execute("""SELECT '%s' FROM users WHERE name='%s'""" % (",".join(columns), name))

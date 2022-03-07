@@ -41,7 +41,10 @@
         <br>
         <p class="aligncenter">
             <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/main_account.svg">
-            <h3 class="aligncenter" style="top: -20px; position: relative">{{name}}</h3>
+            <h3 class="aligncenter" style="top: -20px; position: relative">{{info['name']}}</h3>
+            <form action="{{urls['home']}}", method="post", class="aligncenter">
+                <input type="text", name="email", value="{{info['email']}}">
+            </form>
             <form action='{{urls["home"]}}', method="post", class="aligncenter">
                 <input type="hidden" name="action" value="quit">
                 <input type="submit", value="Выйти">

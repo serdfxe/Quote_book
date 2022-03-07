@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/head_home.svg">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сохранённые</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+</head>
+<style>
+    H2 {
+        font-family: 'Montserrat';
+        font-size:30px;
+        color: #222222;
+        transition: all 1s;
+    }
+
+    H3{
+        font-family: 'Montserrat';
+        font-size:20px;
+        color: #404040;
+        transition: all 1s;
+    }
+
+    .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+    }
+
+    .aligncenter {
+        text-align: center;
+    }
+
+</style>
+{{ nav_style | safe}}
+
+<script>
+    function mark_like(like){
+        if(like.src == "https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg"){
+            like.src = "https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/like.svg"
+        }else{
+            like.src = "https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg"
+        }
+        
+    }
+</script>
+<body>
+    {{ navbar | safe}}
+
+    <div class="main"> 
+        <p class="aligncenter">
+            <h2 class="aligncenter">Недавние обновления:</h2>
+
+            {% block content %}
+            <ul>
+                {% for s in updates %}
+                <p>
+                    <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", style="width: 400px; left: 10px; position: relative;">
+                    <h3>•{{s}}</h3>
+                </p>
+                {% endfor %}
+            </ul>
+            {% endblock %}
+        </p>
+    </div>
+</body>
+</html>

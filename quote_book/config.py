@@ -4,7 +4,8 @@ urls = {
     "home": "home.html",
     "log": "login.html",
     "forgot_password": '',
-    "saves": "saves.html"
+    "saves": "saves.html",
+    "info": "info.html"
 }
 
 main_url = 'http://sheeesh.ru'
@@ -13,7 +14,7 @@ main_url = "http://127.0.0.1"
 urls_navbar = {
     "home": f"{main_url}/home",
     "search": f"{main_url}/search",
-    "info": f"{main_url}info",
+    "info": f"{main_url}/info",
     "saves": f"{main_url}/saves",
     "reg": f"{main_url}/reg",
     "log": f"{main_url}/log",
@@ -69,12 +70,21 @@ navbar_body = f"""
     </div>
 """
 
+updates = ["Полностью обновлён дизайн", "Теперь можно выйти из своего аккаунта","Доработана функция сохранения цитат в личный список"]
+
 paths = {
     'data':'/Users/pasha/Desktop/крутая папка/проги/projects/Quote_book/quote_book/data.sqlite',
     'users':'/Users/pasha/Desktop/крутая папка/проги/projects/Quote_book/quote_book/users_data.db'
 }
 
 paths = {
+    'data':'/Users/pavel/Desktop/pr/Quote_book/quote_book/data.sqlite',
+    'users':'/Users/pavel/Desktop/pr/Quote_book/quote_book/users_data.db'
+}
+
+'''
+paths = {
     'data':'/root/Quote_book/quote_book/data.sqlite',
     'users':'/root/Quote_book/quote_book/users_data.db'
 }
+'''

@@ -4,4 +4,4 @@ from quote_book.config import *
 if __name__ == "__main__":
     app = create_app()
     
-    app.run("localhost", port="80")
+    app.run("127.0.0.1", port="80")

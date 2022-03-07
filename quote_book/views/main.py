@@ -1,4 +1,3 @@
-from configparser import MAX_INTERPOLATION_DEPTH
 from flask import Blueprint, redirect, render_template, request, session, url_for
 from quote_book.config import *
 from quote_book.models import Quote_book_db, User_db
@@ -91,3 +90,9 @@ def saves_page():
             User_db.remove_quote_from_user_list(name, quoteID)
             results=Quote_book_db.get_quotes_from_user_list(name)
             return render_template(urls["saves"], urls = urls_navbar, navbar = navbar_body, nav_style = navbar_style, results=results, name = name)
+
+
+@main.route("/info", methods=('GET', 'POST'))
+def info_page():
+    if request.method == "GET":
+        return render_template(urls["info"], navbar = navbar_body, nav_style = navbar_style, updates = updates)

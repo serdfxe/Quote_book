@@ -1,8 +1,5 @@
-from os import access
-from click import pass_context
 from flask import session
 from quote_book.init_db import quote_db, user_db
-import sqlite3
 
 
 class Quote_book_db():
@@ -40,7 +37,6 @@ class Quote_book_db():
         """get quotes from user_list"""
     
         list = User_db.get_user_list(name)
-        print(list)
         
         return Quote_book_db.make_message_from_list(list)
 

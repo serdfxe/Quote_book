@@ -189,5 +189,9 @@ class User_db():
  
     def get_user_info(name, *columns):
         connection, cursor = User_db.make_connection()
-
-        cursor.execute("""SELECT '%s' FROM users WHERE name='%s'""" % (",".join(columns), name))
+        cursor.execute("""SELECT %s FROM users WHERE name='%s'""" % (",".join(columns), name))
+        res = cursor.fetchone()
+        ans = {}
+        for i in range(len(res)):
+            ans[columns[i]] = res[i]
+        return ans

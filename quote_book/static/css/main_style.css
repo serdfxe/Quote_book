@@ -1,0 +1,23 @@
+H2 {
+    font-family: 'Montserrat';
+    font-size:30px;
+    color: #222222;
+    transition: all 1s;
+}
+
+H3{
+    font-family: 'Montserrat';
+    font-size:20px;
+    color: #404040;
+    transition: all 1s;
+}
+
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+.aligncenter {
+    text-align: center;
+}

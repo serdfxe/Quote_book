@@ -71,7 +71,7 @@
                     <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", style="width: 400px; left: 10px; position: relative;">
                     <h2>{{quote['body'] | safe}}</h2>
                     <h3>{{quote['author'] | safe}}</h3>
-                    <form action="http://sheeesh.ru/search", method="post">
+                    <form action="{{urls['search']}}/search", method="post">
                         <input type="hidden", name="quoteID", value="{{quote['id']}}">
                         <input type="hidden", name="query", value='{{query}}'>
                         {% if quote["id"] in likes %}

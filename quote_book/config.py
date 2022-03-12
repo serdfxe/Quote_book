@@ -1,4 +1,4 @@
-urls = {
+urls_to_files = {
     "search": "search.html",
     "reg": "registration.html",
     "home": "home.html",
@@ -11,7 +11,7 @@ urls = {
 main_url = 'http://sheeesh.ru'
 main_url = "http://127.0.0.1"
 
-urls_navbar = {
+urls = {
     "home": f"{main_url}/home",
     "search": f"{main_url}/search",
     "info": f"{main_url}/info",
@@ -63,10 +63,10 @@ navbar_style = """
 
 navbar_body = f"""
 <div class="sidenav", id="navbar">
-        <a href="{urls_navbar['home']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/account_nav.svg"></a>
-        <a href="{urls_navbar['search']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/search_nav.svg"></a>
-        <a href="{urls_navbar['info']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/info_nav.svg"></a> 
-        <a href="{urls_navbar['saves']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/saves_nav.svg"></a> 
+        <a href="{urls['home']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/account_nav.svg"></a>
+        <a href="{urls['search']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/search_nav.svg"></a>
+        <a href="{urls['info']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/info_nav.svg"></a> 
+        <a href="{urls['saves']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/saves_nav.svg"></a> 
     </div>
 """
 

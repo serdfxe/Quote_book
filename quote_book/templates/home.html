@@ -18,14 +18,14 @@
             <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/main_account.svg">
             <h2 class="aligncenter" style="top: -20px; position: relative"><br>{{info['name']}}</h2>
             <form action="{{urls['home']}}", method="post", class="aligncenter">
-                <input type="hidden", value="change_email", name="action">
-                <h3>Почта: <input type="text", name="email", value="{{info['email']}}", style="border: none; background-color: #DBEFED;"></h3>
+                <input type="hidden", value="{'action':'change', 'col':'email'}", name="info">
+                <h3>Почта: <input type="text", name="var", value="{{info['email']}}", style="border: none; background-color: #DBEFED;"></h3>
             </form>
 
 
             <br>
             <form action='{{urls["home"]}}', method="post", class="aligncenter">
-                <input type="hidden" name="action" value="quit">
+                <input type="hidden", name="info", value="{'action':'quit'}">
                 <input type="submit", value="Выйти">
             </form>
         </div>

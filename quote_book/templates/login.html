@@ -155,15 +155,15 @@
                     <input type="text" id="user" name="name" placeholder="логин" />
                     <input type="password" id="pass" name="password" placeholder="пароль" />
                     <button type="submit", style="font-size: 20px;">></button>
+                    <p>Нет аккаунта? <a href="{{urls['reg']}}">кликай сюда</a></p>
+                    <p>Забыл свой пароль? <a href="{{urls['forgot_password']}}">кликай сюда</a></p>
                     {% if method == "post" %}
                         {% if is_correct %}
                             <h2 style="color: green; font-size: 10px;">Авторизация прошла успешно!</h2>
                         {% else %}
                             <h2 style="color: red; font-size: 10px;">Неправильный логин или пароль!</h2>
                         {% endif %}
-                    {% endif %} 
-                    <p>Нет аккаунта? <a href="{{urls['reg']}}">кликай сюда</a></p>
-                    <p>Забыл свой пароль? <a href="{{urls['forgot_password']}}">кликай сюда</a></p>
+                    {% endif %}
             </form>
         </p>
     </div>

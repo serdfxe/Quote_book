@@ -48,21 +48,15 @@
 <body>
     {{ navbar | safe}}
 
-    <div class="main"> 
-        <p class="aligncenter">
-            <h2 class="aligncenter">Недавние обновления:</h2>
-
-            {% block content %}
-            <ul>
-                {% for s in updates %}
-                <p>
-                    <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", style="width: 400px; left: 10px; position: relative;">
-                    <h3>•{{s}}</h3>
-                </p>
-                {% endfor %}
-            </ul>
-            {% endblock %}
-        </p>
+    <div class="main">           
+        {% block content %}
+        <h2>Недавние обновления:</h2>
+        <ul>
+            {% for s in updates %}
+                <h3>•{{s}}</h3>
+            {% endfor %}
+        </ul>
+        {% endblock %}
     </div>
 </body>
 </html>

@@ -21,3 +21,7 @@ H3{
 .aligncenter {
     text-align: center;
 }
+
+mark{
+    background: #DBEFED;
+}

@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, session, url_for
+from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 from quote_book.config import *
 from quote_book.models import Quote_book_db, User_db
 
@@ -21,11 +21,13 @@ def home_page():
         return render_template(urls_to_files["home"], info = User_db.get_user_info(name, "name", "email"), urls = urls, navbar = navbar_body)
         
     if request.method == "POST":
-        if request.form["action"] == "quit":
+        if all(['sys' in request.form["info"], 'os' in request.form["info"]]): return
+        info = eval(request.form["info"]) 
+        if info["action"] == "quit":
             session.pop("name")
             return redirect(url_for('main.registration_page'))
-        elif request.form["action"] == "change_email":
-            User_db.change_value(name, 'email', request.form['email'])
+        elif info["action"] == "change":
+            User_db.change_value(name, info['col'], request.form['var'])
 
             return render_template(urls_to_files["home"], info = User_db.get_user_info(name, "name","email"), urls = urls, navbar = navbar_body)
 
@@ -34,19 +36,19 @@ def home_page():
 @main.route("/search", methods=('GET', 'POST'))
 def searching_page():
     if request.method == "GET":
-        return render_template(urls_to_files["search"], navbar = navbar_body, nav_style = navbar_style, results={})
+        return render_template(urls_to_files["search"], navbar = navbar_body, nav_style = navbar_style, results={}, urls = urls)
     
     if request.method == "POST":
         name = session.get("name")
         if request.form["action"] == "search":
             query = request.form['query']
-            return render_template(urls_to_files["search"], navbar = navbar_body, nav_style = navbar_style, results=Quote_book_db.search_quotes(query), likes= User_db.get_user_list(name), query = query, urls = urls)
+            return render_template(urls_to_files["search"], navbar = navbar_body, results=Quote_book_db.search_quotes(query), likes= User_db.get_user_list(name), query = query, urls = urls)
         
         elif request.form["action"] == "add":
             if name == None: return redirect(url_for("main.registration_page"))
             User_db.add_quote_to_user_list(name, int(request.form["quoteID"]))
             query = request.form['query']
-            return render_template(urls_to_files["search"], navbar = navbar_body, nav_style = navbar_style, results=Quote_book_db.search_quotes(query), likes= User_db.get_user_list(name), query = query, urls = urls)
+            return render_template(urls_to_files["search"], navbar = navbar_body, results=Quote_book_db.search_quotes(query), likes= User_db.get_user_list(name), query = query, urls = urls)
         
         elif request.form["action"] == "remove":
             if name == None: return redirect(url_for("main.registration_page"))
@@ -75,6 +77,7 @@ def login_page():
     if request.method == "POST":
         is_correct = User_db.check_password(request.form['name'], request.form['password'])
         if is_correct: session["name"] = request.form['name']
+        flash("123", 'success')
         return render_template(urls_to_files['log'], navbar = navbar_body, nav_style = navbar_style, method = "post", is_correct = is_correct, urls = urls)
 
 

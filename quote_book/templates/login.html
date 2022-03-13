@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация</title>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/navbar_style.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
 </head>
 <style>
     p{
@@ -140,7 +142,6 @@
         text-align: center;
     }
 </style>
-{{ nav_style | safe}}
 <body>
     {{ navbar | safe}}
 

@@ -1,4 +1,6 @@
-import email
+from distutils.command import config
+import os
+from dotenv import dotenv_values
 
 
 urls_to_files = {
@@ -52,5 +54,7 @@ paths = {
 }
 '''
 
+conf = dotenv_values(".gitignore\.env")
+
 email_addres = 'info@sheeesh.ru'
-email_password = ''
+email_password = conf['EMAIL_PASSWORD']

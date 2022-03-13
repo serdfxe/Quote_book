@@ -36,7 +36,7 @@ def home_page():
 @main.route("/search", methods=('GET', 'POST'))
 def searching_page():
     if request.method == "GET":
-        return render_template(urls_to_files["search"], navbar = navbar_body, nav_style = navbar_style, results={}, urls = urls)
+        return render_template(urls_to_files["search"], navbar = navbar_body, results={}, urls = urls)
     
     if request.method == "POST":
         name = session.get("name")
@@ -55,30 +55,30 @@ def searching_page():
             quoteID = request.form["quoteID"]
             query = request.form["query"]
             User_db.remove_quote_from_user_list(name, quoteID)
-            return render_template(urls_to_files["search"], navbar = navbar_body, nav_style = navbar_style, results=Quote_book_db.search_quotes(query), likes= User_db.get_user_list(name), query = query, urls = urls)
+            return render_template(urls_to_files["search"], navbar = navbar_body, results=Quote_book_db.search_quotes(query), likes= User_db.get_user_list(name), query = query, urls = urls)
 
 
 @main.route("/reg", methods=('GET', 'POST'))
 def registration_page():
     if request.method == "GET":
-        return render_template(urls_to_files['reg'], navbar = navbar_body, nav_style = navbar_style, method = "get", urls = urls)
+        return render_template(urls_to_files['reg'], navbar = navbar_body, method = "get", urls = urls)
 
     if request.method == "POST":
         is_correct = User_db.add_user_to_db(request.form['name'], request.form['password'], [])
         if is_correct: session["name"] = request.form['name']
-        return render_template(urls_to_files['reg'], navbar = navbar_body, nav_style = navbar_style, method = "post", is_correct = is_correct, urls = urls)
+        return render_template(urls_to_files['reg'], navbar = navbar_body, method = "post", is_correct = is_correct, urls = urls)
 
 
 @main.route("/log", methods=('GET', 'POST'))
 def login_page():
     if request.method == "GET":
-        return render_template(urls_to_files['log'], navbar = navbar_body, nav_style = navbar_style, method = "get", urls = urls)
+        return render_template(urls_to_files['log'], navbar = navbar_body, method = "get", urls = urls)
 
     if request.method == "POST":
         is_correct = User_db.check_password(request.form['name'], request.form['password'])
         if is_correct: session["name"] = request.form['name']
         flash("123", 'success')
-        return render_template(urls_to_files['log'], navbar = navbar_body, nav_style = navbar_style, method = "post", is_correct = is_correct, urls = urls)
+        return render_template(urls_to_files['log'], navbar = navbar_body, method = "post", is_correct = is_correct, urls = urls)
 
 
 @main.route("/saves", methods=('GET', 'POST'))
@@ -89,17 +89,17 @@ def saves_page():
     if request.method == "GET":
         results=Quote_book_db.get_quotes_from_user_list(name)
 
-        return render_template(urls_to_files["saves"], urls = urls, navbar = navbar_body, nav_style = navbar_style, results=results, name = name)
+        return render_template(urls_to_files["saves"], urls = urls, navbar = navbar_body, results=results, info = User_db.get_user_info(name, "name"))
     
     if request.method == "POST":
         if request.form["action"] == "remove":
             quoteID = request.form["quoteID"]
             User_db.remove_quote_from_user_list(name, quoteID)
             results=Quote_book_db.get_quotes_from_user_list(name)
-            return render_template(urls_to_files["saves"], urls = urls, navbar = navbar_body, nav_style = navbar_style, results=results, name = name)
+            return render_template(urls_to_files["saves"], urls = urls, navbar = navbar_body, results=results, info = User_db.get_user_info(name, "name"))
 
 
 @main.route("/info", methods=('GET', 'POST'))
 def info_page():
     if request.method == "GET":
-        return render_template(urls_to_files["info"], navbar = navbar_body, nav_style = navbar_style, updates = updates)
+        return render_template(urls_to_files["info"], navbar = navbar_body, updates = updates)

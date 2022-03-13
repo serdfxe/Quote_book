@@ -6,35 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сохранённые</title>
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/navbar_style.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
 </head>
-<style>
-    H2 {
-        font-family: 'Montserrat';
-        font-size:30px;
-        color: #222222;
-        transition: all 1s;
-    }
-
-    H3{
-        font-family: 'Montserrat';
-        font-size:20px;
-        color: #404040;
-        transition: all 1s;
-    }
-
-    .main {
-        margin-left: 160px; /* Same as the width of the sidenav */
-        font-size: 28px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
-    }
-
-    .aligncenter {
-        text-align: center;
-    }
-
-</style>
-{{ nav_style | safe}}
-
 <script>
     function mark_like(like){
         if(like.src == "https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg"){
@@ -48,7 +22,8 @@
 <body>
     {{ navbar | safe}}
 
-    <div class="main">           
+    <div class="main">   
+        <br>        
         {% block content %}
         <h2>Недавние обновления:</h2>
         <ul>

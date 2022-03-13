@@ -1,8 +1,10 @@
 from flask import session
 from quote_book.init_db import quote_db, user_db
 import smtplib
-from config import email_password, email_addres
- 
+from quote_book.config import email_password, email_addres
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 
 class Quote_book_db():
     _connection = quote_db
@@ -201,4 +203,22 @@ class Email():
 
     def auth():
         smtp = smtplib.SMTP("smtp.timeweb.ru")
-        smtp.login()
+        smtp.login(Email._addres, Email._password)
+        return smtp
+
+    
+    def send_message(to, sub, body):
+        smtp = Email.auth()
+
+        msg = MIMEMultipart()
+        message = body
+        msg['From'] = "your_address"
+        msg['To'] = "to_address"
+        msg['Subject'] = "Subscription"
+        msg.attach(MIMEText(message, 'plain'))
+        
+        smtp.starttls()
+        
+        smtp.sendmail(msg['From'], msg['To'], msg.as_string())
+        
+        smtp.quit()

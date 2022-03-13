@@ -1,6 +1,8 @@
 from flask import session
 from quote_book.init_db import quote_db, user_db
-
+import smtplib
+from config import email_password, email_addres
+ 
 
 class Quote_book_db():
     _connection = quote_db
@@ -191,3 +193,12 @@ class User_db():
         for i in range(len(res)):
             ans[columns[i]] = res[i]
         return ans
+
+
+class Email():
+    _addres = email_addres
+    _password = email_password
+
+    def auth():
+        smtp = smtplib.SMTP("smtp.timeweb.ru")
+        smtp.login()

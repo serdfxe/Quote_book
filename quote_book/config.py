@@ -1,3 +1,6 @@
+import email
+
+
 urls_to_files = {
     "search": "search.html",
     "reg": "registration.html",
@@ -88,3 +91,6 @@ paths = {
     'users':'/root/Quote_book/quote_book/users_data.db'
 }
 '''
+
+email_addres = 'info@sheeesh.ru'
+email_password = ''

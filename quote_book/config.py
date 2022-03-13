@@ -24,46 +24,6 @@ urls = {
     "forgot_password": f"{main_url}/forgot_password"
 }
 
-navbar_style = """
-
-<style>
-    .sidenav {
-        height: 100%;
-        width: 70px;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #DBEFED;
-        overflow-x: hidden;
-        padding-top: 20px;
-        transition: 0.5s;
-    }
-
-    .sidenav:hover{
-        width: 100px;
-    }
-
-    .sidenav a {
-        position: relative;
-        padding: 7px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 25px;
-        display: block;
-        color: hsl(169, 15%, 48%);
-    }
-
-    .sidenav a img{
-        height: 40px;
-        transition: 0.5s;
-    }
-
-    .sidenav a img:hover{
-        height: 60px;
-    }
-</style>
-"""
-
 navbar_body = f"""
 <div class="sidenav", id="navbar">
         <a href="{urls['home']}"><img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/static/account_nav.svg"></a>

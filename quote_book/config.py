@@ -14,8 +14,8 @@ urls_to_files = {
     "info": "info.html"
 }
 
-#main_url = 'http://sheeesh.ru'
-main_url = "http://127.0.0.1"
+main_url = 'http://sheeesh.ru'
+#main_url = "http://127.0.0.1"
 
 urls = {
     "home": f"{main_url}/home",
@@ -48,5 +48,4 @@ print()
 conf = dotenv_values()
 
 email_addres = 'info@sheeesh.ru'
-email_password = 'sadpgfijwp9eutsdf'
-#email_password = conf['EMAIL_PASSWORD']
+email_password = conf['EMAIL_PASSWORD']

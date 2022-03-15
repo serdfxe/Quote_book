@@ -133,7 +133,7 @@ class User_db():
         newid = len(cursor.fetchall())
         cursor.execute("""INSERT INTO users(userid, name, password, info, email) VALUES(?,?,?,?,?);""", (newid, name, password, str(info), None))
 
-        cursor.execute("""INSERT INTO confirm_users(name, email, token, email_status) VALUES(?, ?, ?, ?)""", (name, None, secrets.token_urlsafe(), 0))
+        cursor.execute("""INSERT INTO confirm_users(name, email, token) VALUES(?, ?, ?)""", (name, None, secrets.token_urlsafe()))
         connection.commit()
         return True
 
@@ -235,7 +235,7 @@ class User_db():
         name = info['name']
         print(name)
         User_db.change_value(name, 'password', form["password"])
-        
+
         return True, ''
 
 

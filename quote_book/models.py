@@ -253,9 +253,8 @@ class Email():
         smtp = smtplib.SMTP("smtp.timeweb.ru")
         smtp.starttls() 
         print(f'addres = {Email._addres} password = {Email._password}')
-        print(smtp.login(Email._addres, Email._password).encode("utf-8"))
+        print(smtp.login(Email._addres, Email._password, 'portable'))
        
-
         msg = MIMEMultipart()
         message = body
         msg['From'] = Email._addres

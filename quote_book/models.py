@@ -253,7 +253,7 @@ class Email():
         smtp = smtplib.SMTP("smtp.timeweb.ru")
         smtp.starttls() 
         print(f'addres = {Email._addres} password = {Email._password}')
-        print(smtp.login(Email._addres.encode('ascii'), Email._password.encode('ascii')))
+        print(smtp.login(Email._addres.encode('utf-8').decode('ascii'), Email._password.encode('utf-8').decode('ascii')))
        
         msg = MIMEMultipart()
         message = body

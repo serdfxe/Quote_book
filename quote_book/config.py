@@ -8,7 +8,7 @@ urls_to_files = {
     "reg": "registration.html",
     "home": "home.html",
     "log": "login.html",
-    "forgot_password": '',
+    "forgot_password": 'forgot_password.html',
     "saves": "saves.html",
     "info": "info.html"
 }

@@ -2,7 +2,7 @@ from flask import session
 import secrets
 from quote_book.init_db import quote_db, user_db
 import smtplib
-from quote_book.config import email_password, email_addres
+from quote_book.config import email_password, email_addres, main_url
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -133,7 +133,7 @@ class User_db():
         newid = len(cursor.fetchall())
         cursor.execute("""INSERT INTO users(userid, name, password, info, email) VALUES(?,?,?,?,?);""", (newid, name, password, str(info), None))
 
-        cursor.execute("""INSERT INTO confirm_users(userid, email, token, email_status) VALUES(?, ?, ?, ?)""", (newid, None, secrets.token_urlsafe(), 0))
+        cursor.execute("""INSERT INTO confirm_users(name, email, token, email_status) VALUES(?, ?, ?, ?)""", (name, None, secrets.token_urlsafe(), 0))
         connection.commit()
         return True
 
@@ -186,8 +186,10 @@ class User_db():
     def change_value(name, column, value):
         connection, cursor = User_db.make_connection()
         cursor.execute("""UPDATE users set '%s' = "%s" WHERE name='%s'""" % (column, value, name))
-
         connection.commit()
+        if column == 'email':
+            cursor.execute("""UPDATE confirm_users set '%s' = "%s" WHERE name='%s'""" % (column, value, name))
+            connection.commit()
 
  
     def get_user_info(name, *columns):
@@ -200,24 +202,47 @@ class User_db():
         return ans
 
 
+    def get_info_from_confirm_users_by_name(name, *columns):
+        connection, cursor = User_db.make_connection()
+        cursor.execute("""SELECT %s FROM confirm_users WHERE name='%s'""" % (",".join(columns), name))
+        res = cursor.fetchone()
+        print(res)
+        ans = {}
+        for i in range(len(res)):
+            ans[columns[i]] = res[i]
+        return ans
+
+
+    def get_info_from_confirm_users_by_email(email, *columns):
+        connection, cursor = User_db.make_connection()
+        cursor.execute("""SELECT %s FROM confirm_users WHERE email='%s'""" % (",".join(columns), email))
+        res = cursor.fetchone()
+        print(res)
+        ans = {}
+        for i in range(len(res)):
+            ans[columns[i]] = res[i]
+        return ans
+
+
 class Email():
     _addres = email_addres
     _password = email_password
 
     def auth():
         smtp = smtplib.SMTP("smtp.timeweb.ru")
-        smtp.login(Email._addres, Email._password)
+        print(smtp.login(Email._addres, Email._password))
         return smtp
 
     
     def send_message(to, sub, body):
-        smtp = Email.auth()
+        smtp = smtplib.SMTP("smtp.timeweb.ru")
+        print(smtp.login(Email._addres, Email._password))
 
         msg = MIMEMultipart()
         message = body
-        msg['From'] = "your_address"
-        msg['To'] = "to_address"
-        msg['Subject'] = "Subscription"
+        msg['From'] = Email._addres
+        msg['To'] = to
+        msg['Subject'] = sub
         msg.attach(MIMEText(message, 'plain'))
         
         smtp.starttls()
@@ -225,3 +250,21 @@ class Email():
         smtp.sendmail(msg['From'], msg['To'], msg.as_string())
         
         smtp.quit()
+
+
+    def send_token_to_user(form):
+        print(form)
+        if all([form[i] == '' for i in form]): False
+        email = form['email']
+        name = form['name']
+        if email != '':
+            token = User_db.get_info_from_confirm_users_by_email(email, 'token')['token']
+        else:
+            if not User_db.is_in_db(name): return False
+            info = User_db.get_info_from_confirm_users_by_name(name, 'token','email')
+            token = info["token"]
+            email = info["email"]
+        if token == None: return False
+        print(f'email={email} token={token}')
+        Email.send_message(email, 'Восстановление пароля', f'Перейдите по ссылке для смены пароля:\n{main_url}/change_password/{token}')
+        return True

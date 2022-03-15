@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 from quote_book.config import *
-from quote_book.models import Quote_book_db, User_db
+from quote_book.models import Quote_book_db, User_db, Email
 
 
 main = Blueprint("main", __name__)
@@ -80,6 +80,13 @@ def login_page():
         flash("123", 'success')
         return render_template(urls_to_files['log'], navbar = navbar_body, method = "post", is_correct = is_correct, urls = urls)
 
+
+@main.route("/forgot_password", methods=('GET', 'POST'))
+def forgot_password_page():
+    if request.method == "GET":
+        return render_template(urls_to_files["forgot_password"], navbar = navbar_body, method = "get", urls = urls)
+    if request.method == "POST":
+        return render_template(urls_to_files["forgot_password"], navbar = navbar_body, method = "post", urls = urls, is_correct = Email.send_token_to_user(request.form))
 
 @main.route("/saves", methods=('GET', 'POST'))
 def saves_page():

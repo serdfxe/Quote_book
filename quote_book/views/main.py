@@ -1,3 +1,4 @@
+import email
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 from quote_book.config import *
 from quote_book.models import Quote_book_db, User_db, Email
@@ -86,7 +87,15 @@ def forgot_password_page():
     if request.method == "GET":
         return render_template(urls_to_files["forgot_password"], navbar = navbar_body, method = "get", urls = urls)
     if request.method == "POST":
-        return render_template(urls_to_files["forgot_password"], navbar = navbar_body, method = "post", urls = urls, is_correct = Email.send_token_to_user(request.form))
+        is_correct, email_to = Email.send_token_to_user(request.form)
+        return render_template(urls_to_files["forgot_password"], navbar = navbar_body, method = "post", urls = urls, is_correct = is_correct, email_to = email_to)
+
+
+@main.route("/change_password/<string:s>", methods=('GET', 'POST'))
+def change_password_page(s):
+    if request.method == "GET":
+        print(s)
+
 
 @main.route("/saves", methods=('GET', 'POST'))
 def saves_page():

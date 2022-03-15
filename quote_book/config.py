@@ -9,6 +9,7 @@ urls_to_files = {
     "home": "home.html",
     "log": "login.html",
     "forgot_password": 'forgot_password.html',
+    "change_password": 'change_password.html',
     "saves": "saves.html",
     "info": "info.html"
 }

@@ -236,6 +236,7 @@ class Email():
     
     def send_message(to, sub, body):
         smtp = smtplib.SMTP("smtp.timeweb.ru")
+        smtp.starttls()
         print(smtp.login(Email._addres, Email._password))
 
         msg = MIMEMultipart()
@@ -245,8 +246,6 @@ class Email():
         msg['Subject'] = sub
         msg.attach(MIMEText(message, 'plain'))
         
-        smtp.starttls()
-        
         smtp.sendmail(msg['From'], msg['To'], msg.as_string())
         
         smtp.quit()
@@ -254,17 +253,17 @@ class Email():
 
     def send_token_to_user(form):
         print(form)
-        if all([form[i] == '' for i in form]): False
+        if all([form[i] == '' for i in form]): return False, ''
         email = form['email']
         name = form['name']
         if email != '':
             token = User_db.get_info_from_confirm_users_by_email(email, 'token')['token']
         else:
-            if not User_db.is_in_db(name): return False
+            if not User_db.is_in_db(name): return False, ''
             info = User_db.get_info_from_confirm_users_by_name(name, 'token','email')
             token = info["token"]
             email = info["email"]
-        if token == None: return False
+        if token == None: return False, ''
         print(f'email={email} token={token}')
         Email.send_message(email, 'Восстановление пароля', f'Перейдите по ссылке для смены пароля:\n{main_url}/change_password/{token}')
-        return True
+        return True, email[:4]+"*"*len(email[4:-3])+email[-3:]

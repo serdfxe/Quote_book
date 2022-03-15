@@ -1,4 +1,5 @@
 from flask import session
+import secrets
 from quote_book.init_db import quote_db, user_db
 import smtplib
 from quote_book.config import email_password, email_addres
@@ -131,6 +132,8 @@ class User_db():
         cursor.execute('''SELECT userid FROM users''')
         newid = len(cursor.fetchall())
         cursor.execute("""INSERT INTO users(userid, name, password, info, email) VALUES(?,?,?,?,?);""", (newid, name, password, str(info), None))
+
+        cursor.execute("""INSERT INTO confirm_users(userid, email, token, email_status) VALUES(?, ?, ?, ?)""", (newid, None, secrets.token_urlsafe(), 0))
         connection.commit()
         return True
 

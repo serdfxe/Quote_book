@@ -185,8 +185,15 @@ class User_db():
 
     def change_value(name, column, value):
         connection, cursor = User_db.make_connection()
+
+        if column == "token":
+            cursor.execute("""UPDATE users set token = "%s" WHERE name='%s'""" % (value, name))
+            connection.commit()
+            return
+
         cursor.execute("""UPDATE users set '%s' = "%s" WHERE name='%s'""" % (column, value, name))
         connection.commit()
+
         if column == 'email':
             cursor.execute("""UPDATE confirm_users set '%s' = "%s" WHERE name='%s'""" % (column, value, name))
             connection.commit()
@@ -197,31 +204,39 @@ class User_db():
         cursor.execute("""SELECT %s FROM users WHERE name='%s'""" % (",".join(columns), name))
         res = cursor.fetchone()
         ans = {}
-        for i in range(len(res)):
-            ans[columns[i]] = res[i]
+        try:
+            for i in range(len(res)):
+                ans[columns[i]] = res[i]
+        except Exception:
+            return ''
         return ans
 
 
-    def get_info_from_confirm_users_by_name(name, *columns):
+    def get_info_from_confirm_users(col, val, *columns):
         connection, cursor = User_db.make_connection()
-        cursor.execute("""SELECT %s FROM confirm_users WHERE name='%s'""" % (",".join(columns), name))
+        cursor.execute("""SELECT %s FROM confirm_users WHERE %s='%s'""" % (",".join(columns), col, val))
         res = cursor.fetchone()
-        print(res)
+        print('get_info_from_confirm_users = ',res)
         ans = {}
-        for i in range(len(res)):
-            ans[columns[i]] = res[i]
+        try:
+            for i in range(len(res)):
+                ans[columns[i]] = res[i]
+        except Exception:
+            return ''
         return ans
 
 
-    def get_info_from_confirm_users_by_email(email, *columns):
-        connection, cursor = User_db.make_connection()
-        cursor.execute("""SELECT %s FROM confirm_users WHERE email='%s'""" % (",".join(columns), email))
-        res = cursor.fetchone()
-        print(res)
-        ans = {}
-        for i in range(len(res)):
-            ans[columns[i]] = res[i]
-        return ans
+    def change_password(form, token):
+        if form["password"] != form["rep_password"]: return False, 'Пароли не совпадают!'
+
+        info = User_db.get_info_from_confirm_users('token', token, 'name')
+        if info == '': return False, 'Что-то не так с ссылкой!'
+
+        name = info['name']
+        print(name)
+        User_db.change_value(name, 'password', form["password"])
+        
+        return True, ''
 
 
 class Email():
@@ -253,17 +268,24 @@ class Email():
 
     def send_token_to_user(form):
         print(form)
+
         if all([form[i] == '' for i in form]): return False, ''
+
         email = form['email']
         name = form['name']
+
         if email != '':
-            token = User_db.get_info_from_confirm_users_by_email(email, 'token')['token']
+            info = User_db.get_info_from_confirm_users("email", email, 'token')
         else:
             if not User_db.is_in_db(name): return False, ''
-            info = User_db.get_info_from_confirm_users_by_name(name, 'token','email')
-            token = info["token"]
-            email = info["email"]
-        if token == None: return False, ''
+
+            info = User_db.get_info_from_confirm_users("name", name, 'token','email')
+
+        if info == '': return False, ''
+
+        if email == '': email = info['email']
+
+        token = info["token"]
         print(f'email={email} token={token}')
         Email.send_message(email, 'Восстановление пароля', f'Перейдите по ссылке для смены пароля:\n{main_url}/change_password/{token}')
         return True, email[:4]+"*"*len(email[4:-3])+email[-3:]

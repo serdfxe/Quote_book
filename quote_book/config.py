@@ -48,5 +48,5 @@ print()
 conf = dotenv_values()
 
 email_addres = 'info@sheeesh.ru'
-email_password = 'Korobka123'
+email_password = 'sadpgfijwp9eutsdf'
 #email_password = conf['EMAIL_PASSWORD']

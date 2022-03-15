@@ -14,7 +14,7 @@ urls_to_files = {
 }
 
 main_url = 'http://sheeesh.ru'
-main_url = "http://127.0.0.1"
+#main_url = "http://127.0.0.1"
 
 urls = {
     "home": f"{main_url}/home",
@@ -38,23 +38,13 @@ navbar_body = f"""
 updates = ["Полностью обновлён дизайн", "Теперь можно выйти из своего аккаунта","Доработана функция сохранения цитат в личный список", "Теперь при поиске выделяются совпадения", "Теперь можно добавить плчту к аккаунту"]
 
 paths = {
-    'data':'/Users/pasha/Desktop/крутая папка/проги/projects/Quote_book/quote_book/data.sqlite',
-    'users':'/Users/pasha/Desktop/крутая папка/проги/projects/Quote_book/quote_book/users_data.db'
+    'data':f'{os.getcwdb().decode("utf-8")}/quote_book/data.sqlite',
+    'users':f'{os.getcwdb().decode("utf-8")}/quote_book/users_data.db'
 }
-
-paths = {
-    'data':'/Users/pavel/Desktop/pr/Quote_book/quote_book/data.sqlite',
-    'users':'/Users/pavel/Desktop/pr/Quote_book/quote_book/users_data.db'
-}
-
-'''
-paths = {
-    'data':'/root/Quote_book/quote_book/data.sqlite',
-    'users':'/root/Quote_book/quote_book/users_data.db'
-}
-'''
-
-conf = dotenv_values(".gitignore\.env")
+print()
+print(paths)
+print()
+conf = dotenv_values()
 
 email_addres = 'info@sheeesh.ru'
 email_password = conf['EMAIL_PASSWORD']

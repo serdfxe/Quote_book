@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/head_home.svg">
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/head_home.svg') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -15,7 +15,7 @@
     <div class="main"> 
         <br>
         <div class="aligncenter">
-            <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/main_account.svg">
+            <img src="{{url_for('static', filename='img/main_account.svg') }}">
             <h2 class="aligncenter" style="top: -20px; position: relative"><br>{{info['name']}}</h2>
             <form action="{{urls['home']}}", method="post", class="aligncenter">
                 <input type="hidden", value="{'action':'change', 'col':'email'}", name="info">

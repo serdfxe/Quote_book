@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <link rel="shortcut icon" href="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/head_home.svg">
+    <link rel="shortcut icon" type="image" href="{{ url_for('static', filename='img/head_home.svg') }}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,10 +37,10 @@
 </style>
 <script>
     function mark_like(like){
-        if(like.src == "https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg"){
-            like.src = "https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/like.svg"
+        if(like.src == "{{url_for('static', filename='img/marked_like.svg') }}"){
+            like.src = "{{url_for('static', filename='img/like.svg') }}"
         }else{
-            like.src = "https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg"
+            like.src = "{{url_for('static', filename='img/marked_like.svg') }}"
         }
         
     }
@@ -52,7 +52,7 @@
         
 
         <p class="aligncenter">
-            <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/home/main_account.svg">
+            <img src="{{url_for('static', filename='img/main_account.svg') }}">
             <h3 class="aligncenter" style="top: -20px; position: relative">{{name}}</h3>
             <h2 class="aligncenter">Сохранённые цитаты:</h2>
 
@@ -60,13 +60,13 @@
             <ul>
                 {% for quote in results %}
                 <p>
-                    <img src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/seporator.svg", style="width: 400px; left: 10px; position: relative;">
+                    <img src="{{url_for('static', filename='img/seporator.svg') }}", style="width: 400px; left: 10px; position: relative;">
                     <h2>{{quote['body']}}</h2>
                     <h3>{{quote['author']}}</h3>
                     <form action="{{urls['saves']}}", method="post">
                         <input type="hidden", name="action", value="remove">
                         <input type="hidden", name="quoteID", value="{{quote['id']}}">
-                        <input type="image", class="like", src="https://s3.timeweb.com/cc41600-sheeesh-shearcher/main/marked_like.svg", onclick='mark_like(this)'>
+                        <input type="image", class="like", src="{{url_for('static', filename='img/marked_like.svg') }}", onclick='mark_like(this)'>
                     </form>
                 </p>
                 {% endfor %}

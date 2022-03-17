@@ -14,8 +14,8 @@ urls_to_files = {
     "info": "info.html"
 }
 
-main_url = 'http://sheeesh.ru'
-#main_url = "http://127.0.0.1"
+#main_url = 'http://sheeesh.ru'
+main_url = "http://127.0.0.1"
 
 urls = {
     "home": f"{main_url}/home",
@@ -38,14 +38,16 @@ navbar_body = f"""
 
 updates = ["Полностью обновлён дизайн", "Теперь можно выйти из своего аккаунта","Доработана функция сохранения цитат в личный список", "Теперь при поиске выделяются совпадения", "Теперь можно добавить плчту к аккаунту"]
 
+path_to_conf = os.getcwdb().decode("utf-8")
+
 paths = {
-    'data':f'{os.getcwdb().decode("utf-8")}/quote_book/data.sqlite',
-    'users':f'{os.getcwdb().decode("utf-8")}/quote_book/users_data.db'
+    'data':f'{path_to_conf}/quote_book/data.sqlite',
+    'users':f'{path_to_conf}/quote_book/users_data.db'
 }
 print()
 print(paths)
 print()
-conf = dotenv_values()
+conf = dotenv_values(path_to_conf.replace('Quote_book', '')+'.gitignore/.env')
 
 email_addres = 'info@sheeesh.ru'
-email_password = 'Kopato123'
+email_password = conf['EMAIL_PASSWORD']
